@@ -49,6 +49,10 @@ module OmniAuth
       end
 
       def get_oidc_value_from_session(key)
+	# fixing empty session key error
+        oidc_session = session[:oidc]
+        return if oidc_session.nil?
+	# keeping old check 
         oidc_session = session[:oidc].symbolize_keys
         return if oidc_session.nil?
         oidc_session[key]
